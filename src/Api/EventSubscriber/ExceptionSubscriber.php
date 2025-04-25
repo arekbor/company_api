@@ -33,8 +33,7 @@ final class ExceptionSubscriber implements EventSubscriberInterface
     {
         return [
             'error' => [
-                'detail' => $exception->getMessage(),
-                'code' => $exception->getCode()
+                'detail' => $exception->getMessage()
             ]
         ];
     }

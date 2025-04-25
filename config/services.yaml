@@ -20,3 +20,5 @@ services:
   App\Infrastructure\Bus\CommandBus:
     arguments:
       - "@command.bus"
+
+  Symfony\Component\PasswordHasher\PasswordHasherInterface: '@App\Infrastructure\Auth\PasswordHasher'

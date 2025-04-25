@@ -9,6 +9,19 @@ use App\Domain\Entity\User;
 
 final class UserRepository extends AbstractRepository implements UserRepositoryInterface
 {
+    public function getUserByEmail(string $email): ?User
+    {
+        $queryBuilder = $this->entityManager->createQueryBuilder();
+
+        $queryBuilder->select('u')
+            ->from(User::class, 'u')
+            ->where('u.email = :email')
+            ->setParameter('email', $email, 'string')
+        ;
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
+
     public function save(User $user): void
     {
         $this->entityManager->persist($user);

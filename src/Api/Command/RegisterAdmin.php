@@ -11,6 +11,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 #[AsCommand(
     name: 'app:register-admin',
@@ -19,7 +20,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 final class RegisterAdmin extends Command
 {
     public function __construct(
-        private readonly CommandBusInterface $commandBus
+        private readonly CommandBusInterface $commandBus,
+        private readonly ParameterBagInterface $parameter
     ) {
         parent::__construct();
     }
@@ -29,7 +31,10 @@ final class RegisterAdmin extends Command
         $io = new SymfonyStyle($input, $output);
 
         try {
-            $this->commandBus->handle(new RegisterAdminCommand());
+            $email = $this->parameter->get('app.admin.email');
+            $password = $this->parameter->get('app.admin.password');
+
+            $this->commandBus->handle(new RegisterAdminCommand($email, $password));
         } catch (\Throwable $ex) {
             $io->error($ex->getMessage());
             return Command::FAILURE;

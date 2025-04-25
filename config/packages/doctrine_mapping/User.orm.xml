@@ -6,7 +6,7 @@
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <entity name="App\Domain\Entity\User" table="users">
-        <field name="email" column="email" type="string" />
+        <field name="email" column="email" type="string" unique="true" />
         <field name="password" column="password" type="string" />
     </entity>
     

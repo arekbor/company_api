@@ -1,4 +1,6 @@
 parameters:
+  app.admin.email: "%env(ADMIN_EMAIL)%"
+  app.admin.password: "%env(ADMIN_PASSWORD)%"
 
 services:
   _defaults:

@@ -6,6 +6,7 @@ framework:
         default_middleware: false
         middleware:
           - handle_message
+          - doctrine_transaction
       query.bus:
         default_middleware: false
         middleware:

@@ -5,4 +5,3 @@ App\Application\User\Command\Login\LoginCommand:
       - Email: ~
     password:
       - NotBlank: ~
-      - PasswordStrength: ~

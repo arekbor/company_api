@@ -6,6 +6,7 @@ namespace App\Application\User\Command\RegisterAdmin;
 
 use App\Application\Shared\CommandBusHandlerInterface;
 use App\Application\User\Repository\UserRepositoryInterface;
+use App\Domain\Entity\User;
 
 final class RegisterAdminCommandHandler implements CommandBusHandlerInterface
 {
@@ -13,5 +14,12 @@ final class RegisterAdminCommandHandler implements CommandBusHandlerInterface
         private readonly UserRepositoryInterface $userRepository
     ) {}
 
-    public function __invoke(RegisterAdminCommand $command): void {}
+    public function __invoke(RegisterAdminCommand $command): void
+    {
+        $hashedPassword = \password_hash($command->getPassword(), PASSWORD_BCRYPT);
+
+        $user = new User($command->getEmail(), $hashedPassword);
+
+        $this->userRepository->save($user);
+    }
 }

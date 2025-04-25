@@ -2,19 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Application\User\Command;
+namespace App\Application\User\Command\RegisterAdmin;
 
 use App\Application\Shared\CommandBusHandlerInterface;
 use App\Application\User\Repository\UserRepositoryInterface;
 
-final class RegisterUserHandler implements CommandBusHandlerInterface
+final class RegisterAdminCommandHandler implements CommandBusHandlerInterface
 {
     public function __construct(
         private readonly UserRepositoryInterface $userRepository
     ) {}
 
-    public function __invoke(RegisterUser $command): void
-    {
-        dd($command);
-    }
+    public function __invoke(RegisterAdminCommand $command): void {}
 }

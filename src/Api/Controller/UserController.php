@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Api\Controller;
 
 use App\Application\Shared\CommandBusInterface;
-use App\Application\User\Command\RegisterUser;
+use App\Application\User\Command\Login\LoginCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,8 +20,8 @@ final class UserController extends AbstractController
         private readonly CommandBusInterface $commandBus
     ) {}
 
-    #[Route('/register', name: 'api_user_register', methods: [Request::METHOD_POST])]
-    public function register(#[MapRequestPayload] RegisterUser $command): JsonResponse
+    #[Route('/login', name: 'api_user_login', methods: [Request::METHOD_POST])]
+    public function register(#[MapRequestPayload] LoginCommand $command): JsonResponse
     {
         $this->commandBus->handle($command);
 

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Application\User\Command;
+namespace App\Application\User\Command\Login;
 
 use App\Application\Shared\CommandInterface;
 
-final class RegisterUser implements CommandInterface
+final class LoginCommand implements CommandInterface
 {
     private string $email;
     private string $password;

@@ -1,0 +1,21 @@
+doctrine:
+  dbal:
+    url: "%env(resolve:DATABASE_URL)%"
+    profiling_collect_backtrace: "%kernel.debug%"
+    types:
+      uuid_binary: Ramsey\Uuid\Doctrine\UuidBinaryType
+    mapping_types:
+      uuid_binary: binary
+  orm:
+    auto_generate_proxy_classes: true
+    enable_lazy_ghost_objects: true
+    report_fields_where_declared: true
+    validate_xml_mapping: true
+    naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+    auto_mapping: true
+    mappings:
+      Entity:
+        is_bundle: false
+        type: xml
+        dir: "%kernel.project_dir%/config/packages/doctrine_mapping"
+        prefix: "App\\Domain\\Entity"

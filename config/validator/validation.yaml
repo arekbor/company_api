@@ -1,0 +1,10 @@
+App\Application\User\Command\RegisterUser:
+  properties:
+    email:
+      - NotNull: ~
+      - NotBlank: ~
+      - Email: ~
+    password:
+      - NotNull: ~
+      - NotBlank: ~
+      - PasswordStrength: ~

@@ -1,7 +1,0 @@
-App\Application\User\Command\Login\LoginCommand:
-  properties:
-    email:
-      - NotBlank: ~
-      - Email: ~
-    password:
-      - NotBlank: ~

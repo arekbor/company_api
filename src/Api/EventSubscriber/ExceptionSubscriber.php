@@ -17,7 +17,9 @@ final class ExceptionSubscriber implements EventSubscriberInterface
 
         $response = new JsonResponse();
 
-        $response->setData($this->getErrorMessage($exception));
+        $response = new JsonResponse([
+            'message' => $exception->getMessage()
+        ]);
 
         $event->setResponse($response);
     }
@@ -26,15 +28,6 @@ final class ExceptionSubscriber implements EventSubscriberInterface
     {
         return [
             KernelEvents::EXCEPTION => 'onKernelException',
-        ];
-    }
-
-    private function getErrorMessage(\Throwable $exception): array
-    {
-        return [
-            'error' => [
-                'detail' => $exception->getMessage()
-            ]
         ];
     }
 }

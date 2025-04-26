@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Application\Employee\Dto\EmployeeDto;
+use App\Application\Employee\Query\GetEmployeesByCompany\GetEmployeesByCompanyQuery;
 
 #[Route('/api/employee')]
 final class EmployeeController extends AbstractController
@@ -59,5 +60,16 @@ final class EmployeeController extends AbstractController
         $employeeDto = $this->queryBus->ask(new GetEmployeeQuery($id));
 
         return $this->json($employeeDto, Response::HTTP_OK);
+    }
+
+    #[Route('/getEmployeesByCompany/{id}', name: 'api_employee_get_employees', methods: [Request::METHOD_GET])]
+    public function getEmployeesByCompany(string $id): JsonResponse
+    {
+        /**
+         * @var EmployeeDto[] $employeeDtos
+         */
+        $employeeDtos = $this->queryBus->ask(new GetEmployeesByCompanyQuery($id));
+
+        return $this->json($employeeDtos, Response::HTTP_OK);
     }
 }

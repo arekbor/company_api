@@ -45,6 +45,20 @@ final class EmployeeRepository extends AbstractRepository implements EmployeeRep
         return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 
+    public function getEmployeesByCompanyId(UuidInterface $id): array
+    {
+        $queryBuilder = $this->entityManager->createQueryBuilder();
+
+        $queryBuilder->select('e')
+            ->from(Employee::class, 'e')
+            ->innerJoin('e.company', 'c')
+            ->where('c.id = :companyId')
+            ->setParameter('companyId', $id, UuidType::NAME)
+        ;
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
     public function save(Employee $employee): void
     {
         $this->entityManager->persist($employee);

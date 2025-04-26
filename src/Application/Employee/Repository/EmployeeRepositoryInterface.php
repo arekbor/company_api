@@ -13,4 +13,5 @@ interface EmployeeRepositoryInterface
     public function remove(Employee $employee): void;
     public function getById(UuidInterface $id): ?Employee;
     public function save(Employee $employee): void;
+    public function getEmployeesByCompanyId(UuidInterface $id): array;
 }

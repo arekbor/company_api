@@ -9,9 +9,9 @@ use App\Application\Employee\Repository\EmployeeRepositoryInterface;
 use App\Application\Shared\CommandBusHandlerInterface;
 use App\Domain\Entity\Employee;
 use App\Domain\Entity\Company;
+use App\Domain\Exception\EmployeeAlreadyExistsInCompanyException;
+use App\Domain\Exception\EntityNotFoundException;
 use Ramsey\Uuid\Uuid;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class AddEmployeeToCompanyCommandHandler implements CommandBusHandlerInterface
 {
@@ -29,11 +29,11 @@ final class AddEmployeeToCompanyCommandHandler implements CommandBusHandlerInter
          */
         $company = $this->companyRepository->getCompanyById($companyId);
         if ($company === null) {
-            throw new NotFoundHttpException('Company not found');
+            throw new EntityNotFoundException("Company not found");
         }
 
         if ($this->employeeRepository->existsEmployeeInCompany($command->getEmail(), $companyId)) {
-            throw new BadRequestHttpException('Employee by provided email already exists in this company.');
+            throw new EmployeeAlreadyExistsInCompanyException();
         }
 
         $employee = new Employee();

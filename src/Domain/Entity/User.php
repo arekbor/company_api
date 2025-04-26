@@ -11,12 +11,18 @@ final class User extends AbstractEntity
     private string $email;
     private string $password;
 
-    public function __construct(
-        string $email,
-        string $password
-    ) {
+    public function setEmail(string $email): static
+    {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function setPassword(string $password): static
+    {
         $this->password = $password;
+
+        return $this;
     }
 
     public function getEmail(): string

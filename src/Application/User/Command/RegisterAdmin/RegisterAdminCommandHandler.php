@@ -20,7 +20,9 @@ final class RegisterAdminCommandHandler implements CommandBusHandlerInterface
     {
         $hashedPassword = $this->passwordHasher->hash($command->getPassword());
 
-        $user = new User($command->getEmail(), $hashedPassword);
+        $user = new User();
+        $user->setEmail($command->getEmail());
+        $user->setPassword($hashedPassword);
 
         $this->userRepository->save($user);
     }

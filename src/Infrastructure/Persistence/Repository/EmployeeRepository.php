@@ -26,4 +26,27 @@ final class EmployeeRepository extends AbstractRepository implements EmployeeRep
 
         return $queryBuilder->getQuery()->getOneOrNullResult() ? true : false;
     }
+
+    public function remove(Employee $employee): void
+    {
+        $this->entityManager->remove($employee);
+    }
+
+    public function getById(UuidInterface $id): ?Employee
+    {
+        $queryBuilder = $this->entityManager->createQueryBuilder();
+
+        $queryBuilder->select('e')
+            ->from(Employee::class, 'e')
+            ->where('e.id = :id')
+            ->setParameter('id', $id, UuidType::NAME)
+        ;
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
+
+    public function save(Employee $employee): void
+    {
+        $this->entityManager->persist($employee);
+    }
 }

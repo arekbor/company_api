@@ -11,14 +11,23 @@ use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Validator\Exception\ValidationFailedException;
 
 final class ExceptionSubscriber implements EventSubscriberInterface
 {
+    public function __construct(
+        private readonly KernelInterface $kernel
+    ) {}
+
     public function onKernelException(ExceptionEvent $event): void
     {
         $exception = $event->getThrowable();
         $response = new JsonResponse();
+
+        if ('dev' === $this->kernel->getEnvironment()) {
+            throw $exception;
+        }
 
         if ($exception instanceof UnprocessableEntityHttpException) {
             $this->handleUnprocessableEntityException($exception, $response);

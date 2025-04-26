@@ -1,0 +1,18 @@
+App\Application\Company\Command\CreateCompany\CreateCompanyCommand:
+  properties:
+    name:
+      - NotBlank: ~
+    nip:
+      - NotBlank: ~
+      - Regex:
+          pattern: '/^\d{10}$/'
+          message: "NIP must consist of exactly 10 digits."
+    address:
+      - NotBlank: ~
+    city:
+      - NotBlank: ~
+    postalCode:
+      - NotBlank: ~
+      - Regex:
+          pattern: '/^\d{2}-\d{3}$/'
+          message: "The postal code must be in the format NN-NNN (e.g., 00-001)."

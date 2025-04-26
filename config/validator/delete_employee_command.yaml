@@ -1,0 +1,5 @@
+App\Application\Employee\Command\DeleteEmployee\DeleteEmployeeCommand:
+  properties:
+    employeeId:
+      - NotBlank: ~
+      - Uuid: ~

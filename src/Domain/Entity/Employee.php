@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Entity;
 
-final class Employee extends AbstractEntity
+class Employee extends AbstractEntity
 {
     private string $firstName;
     private string $lastName;

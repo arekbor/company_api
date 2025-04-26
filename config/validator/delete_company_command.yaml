@@ -1,0 +1,5 @@
+App\Application\Company\Command\DeleteCompany\DeleteCompanyCommand:
+  properties:
+    companyId:
+      - NotBlank: ~
+      - Uuid: ~

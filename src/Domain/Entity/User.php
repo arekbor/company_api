@@ -6,7 +6,7 @@ namespace App\Domain\Entity;
 
 use App\Domain\Entity\AbstractEntity;
 
-final class User extends AbstractEntity
+class User extends AbstractEntity
 {
     private string $email;
     private string $password;

@@ -11,4 +11,6 @@ interface CompanyRepositoryInterface
 {
     public function save(Company $company): void;
     public function getCompanyById(UuidInterface $id): ?Company;
+    public function remove(Company $company): void;
+    public function hasEmployees(Company $company): bool;
 }

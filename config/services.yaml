@@ -14,11 +14,20 @@ services:
       tags:
         - { name: messenger.message_handler, bus: command.bus }
 
+    App\Application\Shared\QueryBusHandlerInterface:
+      public: true
+      tags:
+        - { name: messenger.message_handler, bus: query.bus }
+
   App\:
     resource: "../src/"
 
   App\Infrastructure\Bus\CommandBus:
     arguments:
       - "@command.bus"
+
+  App\Infrastructure\Bus\QueryBus:
+    arguments:
+      - "@query.bus"
 
   Symfony\Component\PasswordHasher\PasswordHasherInterface: '@App\Infrastructure\Auth\PasswordHasher'

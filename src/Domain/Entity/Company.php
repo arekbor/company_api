@@ -83,9 +83,9 @@ class Company extends AbstractEntity
     }
 
     /**
-     * @return array<Employee>
+     * @return Employee[]
      */
-    public function getEmployees(): array
+    public function getEmployees(): mixed
     {
         return $this->employees;
     }
